@@ -13,9 +13,11 @@ using Test_Identity.Models;
 
 namespace Test_Identity.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class AccountController : Controller
     {
+        private RMSDbContext db = new RMSDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
@@ -66,7 +68,14 @@ namespace Test_Identity.Controllers
                 _userManager = value;
             }
         }
+        public ActionResult Index()
+        {
+            // var Displaylist = RoleRegistrationViewModel.
+            //var RoleList = List < List < Roles >>;
+            return View(db.Registrations);
 
+            //return View(RoleRegistrationViewModel);
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]

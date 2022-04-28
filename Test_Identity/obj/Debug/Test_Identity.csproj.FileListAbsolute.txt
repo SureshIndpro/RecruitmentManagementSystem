@@ -101,7 +101,6 @@ C:\IndPro\Project\Test_Identity\Test_Identity\bin\Microsoft.Owin.Security.Twitte
 C:\IndPro\Project\Test_Identity\Test_Identity\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\IndPro\Project\Test_Identity\Test_Identity\bin\Microsoft.Owin.Security.OAuth.xml
 C:\IndPro\Project\Test_Identity\Test_Identity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.csproj.AssemblyReference.cache
 C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.csproj.CoreCompileInputs.cache
 C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.csproj.CopyComplete
 C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.dll
@@ -112,3 +111,4 @@ C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.Migrations
 C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.Migrations.role.resources
 C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.Migrations.role1.resources
 C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.Migrations.newRole.resources
+C:\IndPro\Project\Test_Identity\Test_Identity\obj\Debug\Test_Identity.Migrations.skill1.resources
