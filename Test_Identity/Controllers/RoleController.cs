@@ -36,6 +36,7 @@ namespace Test_Identity.Controllers
         }
 
         // GET: Role
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             List<RoleViewModel> list = new List<RoleViewModel>();

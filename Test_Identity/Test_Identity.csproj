@@ -170,6 +170,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
@@ -196,13 +197,22 @@
     <Compile Include="Migrations\202204220936371_newRole.designer.cs">
       <DependentUpon>202204220936371_newRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202204270434486_skill1.cs" />
-    <Compile Include="Migrations\202204270434486_skill1.designer.cs">
-      <DependentUpon>202204270434486_skill1.cs</DependentUpon>
+    <Compile Include="Migrations\202204290710481_skills1.cs" />
+    <Compile Include="Migrations\202204290710481_skills1.designer.cs">
+      <DependentUpon>202204290710481_skills1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204290726240_skills.cs" />
+    <Compile Include="Migrations\202204290726240_skills.designer.cs">
+      <DependentUpon>202204290726240_skills.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205190553344_jobupdate1.cs" />
+    <Compile Include="Migrations\202205190553344_jobupdate1.designer.cs">
+      <DependentUpon>202205190553344_jobupdate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RMSDbContext.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -215,6 +225,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chosen\chosen-sprite.png" />
+    <Content Include="Content\Chosen\chosen.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -222,6 +234,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -271,11 +284,17 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
-    <Content Include="Views\Skills\Index.cshtml" />
     <Content Include="Views\Skills\Create.cshtml" />
+    <Content Include="Views\Skills\Index.cshtml" />
     <Content Include="Views\Skills\Details.cshtml" />
     <Content Include="Views\Skills\Edit.cshtml" />
     <Content Include="Views\Skills\Delete.cshtml" />
+    <Content Include="Views\Account\LoggedIn.cshtml" />
+    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Jobs\Delete.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,8 +328,14 @@
     <EmbeddedResource Include="Migrations\202204220936371_newRole.resx">
       <DependentUpon>202204220936371_newRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202204270434486_skill1.resx">
-      <DependentUpon>202204270434486_skill1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202204290710481_skills1.resx">
+      <DependentUpon>202204290710481_skills1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204290726240_skills.resx">
+      <DependentUpon>202204290726240_skills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205190553344_jobupdate1.resx">
+      <DependentUpon>202205190553344_jobupdate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -68,6 +68,20 @@ namespace Test_Identity.Controllers
                 _userManager = value;
             }
         }
+        //Applying list in enum
+        class Program
+        {
+            public enum HeigherDivision
+            {
+                ProjectManager = 1, TeamLead
+            }
+            static void Main(string[] args)
+            {
+                Console.WriteLine("Day of week {0} {1}", (int)HeigherDivision.ProjectManager, HeigherDivision.ProjectManager);
+                Console.WriteLine("Day of week {0} {1}", (int)HeigherDivision.TeamLead, HeigherDivision.TeamLead);
+                Console.ReadLine();
+            }
+        }
         public ActionResult Index()
         {
             // var Displaylist = RoleRegistrationViewModel.
@@ -112,9 +126,21 @@ namespace Test_Identity.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+                    //return RedirectToAction("LoggedIn");
             }
         }
-
+        //Adding After login page
+        public ActionResult LoggedIn()
+        {
+            if (Session["UserName"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]

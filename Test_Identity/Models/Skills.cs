@@ -11,10 +11,11 @@ namespace Test_Identity.Models
     {
         [Key]
         public int SkillId { get; set; }
-
+       
+        [Required(ErrorMessage = "Field can't be empty")]
         public string SkillName { get; set; }
 
-        public DateTime LastUpdatedOn { get; set; }
+       public DateTime? LastUpdatedOn { get; set; }
 
         public string CommentBox { get; set; }
     }

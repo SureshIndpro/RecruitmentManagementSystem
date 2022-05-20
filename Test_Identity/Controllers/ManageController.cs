@@ -10,7 +10,6 @@ using Test_Identity.Models;
 
 namespace Test_Identity.Controllers
 {
-    [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -9,14 +10,15 @@ using Test_Identity.Models;
 
 namespace Test_Identity.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class SkillsController : Controller
     {
-        private RMSDbContext db = new RMSDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Skills
         public ActionResult Index()
         {
-            return View(db.skill.ToList());
+            return View(db.Skills.ToList());
         }
 
         // GET: Skills/Details/5
@@ -26,7 +28,7 @@ namespace Test_Identity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Skills skills = db.skill.Find(id);
+            Skills skills = db.Skills.Find(id);
             if (skills == null)
             {
                 return HttpNotFound();
@@ -45,11 +47,19 @@ namespace Test_Identity.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SkillId,SkillName,LastUpdatedOn,CommentBox")] Skills skills)
+        public ActionResult Create([Bind(Include = "SkillId,SkillName,CommentBox")] Skills skills)
         {
+            
             if (ModelState.IsValid)
             {
-                db.skill.Add(skills);
+                var SkillNameAlreadyExists = db.Skills.Any(x => x.SkillName == skills.SkillName);
+
+                if (SkillNameAlreadyExists)
+                {
+                    ModelState.AddModelError("SkillName", "Skill already exists");
+                    return View(skills);
+                }
+                db.Skills.Add(skills);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -64,7 +74,7 @@ namespace Test_Identity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Skills skills = db.skill.Find(id);
+            Skills skills = db.Skills.Find(id);
             if (skills == null)
             {
                 return HttpNotFound();
@@ -77,7 +87,7 @@ namespace Test_Identity.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SkillId,SkillName,LastUpdatedOn,CommentBox")] Skills skills)
+        public ActionResult Edit([Bind(Include = "SkillId,SkillName,CommentBox")] Skills skills)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +105,7 @@ namespace Test_Identity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Skills skills = db.skill.Find(id);
+            Skills skills = db.Skills.Find(id);
             if (skills == null)
             {
                 return HttpNotFound();
@@ -108,8 +118,8 @@ namespace Test_Identity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Skills skills = db.skill.Find(id);
-            db.skill.Remove(skills);
+            Skills skills = db.Skills.Find(id);
+            db.Skills.Remove(skills);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

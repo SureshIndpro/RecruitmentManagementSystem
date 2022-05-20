@@ -7,13 +7,13 @@ namespace Test_Identity.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class skill1 : IMigrationMetadata
+    public sealed partial class skills : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(skill1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(skills));
         
         string IMigrationMetadata.Id
         {
-            get { return "202204270434486_skill1"; }
+            get { return "202204290726240_skills"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,0 +1,74 @@
+﻿@model Test_Identity.Models.Job
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Experience, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JobDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.JobDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="from-horizontal">
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <lable>Select Skills</lable>
+            @*Normal DropDown*@
+            @* @Html.DropDownListFor(model => model.SelectedSkillID, new SelectList(Model.SkillCollection, "ID", "Skills"), new { id = "normalDropDown" })*@
+
+            @*MuliSelect Dropdown*@
+            @Html.ListBoxFor(Model => Model.SelectedIDArray, new MultiSelectList(Model.SkillCollection, "SkillId", "SkillName"), new {id = "multiSelectDropDown", multiple= "multiple" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@section scripts{
+    <script>
+        $(function () {
+            //normal dropdown
+            //$("#normalDropDown").chosen();
+
+            $("#multiSelectDropDown").chosen({
+                width: "100%"
+            });
+
+        });
+    </script>
+}

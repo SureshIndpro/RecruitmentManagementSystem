@@ -51,5 +51,9 @@ namespace Test_Identity.Models
 
         //public System.Data.Entity.DbSet<Test_Identity.Models.ApplicationUser> ApplicationUsers { get; set; }
         public System.Data.Entity.DbSet<Test_Identity.Models.RoleViewModel> RoleViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<Test_Identity.Models.Skills> Skills { get; set; }
+
+        public System.Data.Entity.DbSet<Test_Identity.Models.Job> Jobs { get; set; }
     }
 }
