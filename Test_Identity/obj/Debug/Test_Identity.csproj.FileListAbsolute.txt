@@ -229,3 +229,5 @@ C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.csproj.CopyComplete
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.dll
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.pdb
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\bin\Facebook.dll
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\bin\Facebook.xml

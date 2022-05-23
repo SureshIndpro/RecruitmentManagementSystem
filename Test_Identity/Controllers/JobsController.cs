@@ -10,7 +10,7 @@ using Test_Identity.Models;
 
 namespace Test_Identity.Controllers
 {
-   // [Authorize(Roles = "Administrator")]
+   [Authorize(Roles = "Administrator")]
     public class JobsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
