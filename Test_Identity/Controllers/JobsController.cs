@@ -112,6 +112,7 @@ namespace Test_Identity.Controllers
                 if (id != 0)
                 {
                     job = db.Jobs.Where(x => x.Id == id).FirstOrDefault();
+                    job.SelectedIDArray = job.SelectedSkillID.Split(',').ToArray();
                 }
                 job.SkillCollection = db.Skills.ToList();
             }

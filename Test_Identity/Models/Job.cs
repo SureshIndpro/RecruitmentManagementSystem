@@ -14,7 +14,6 @@ namespace Test_Identity.Models
         public string JobDescription { get; set; }
 
         public string SelectedSkillID { get; set; }
-        //public string SelectedSkillName { get; set; }
 
         [NotMapped]
         public IEnumerable<Skills> SkillCollection { get; set; }
