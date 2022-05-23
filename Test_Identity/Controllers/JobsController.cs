@@ -18,7 +18,27 @@ namespace Test_Identity.Controllers
         // GET: Jobs
         public ActionResult Index()
         {
-            return View(db.Jobs.ToList());
+            var skillDetails = db.Jobs.ToList();
+            //List<InterviewerSkillIDModels> viewModel = new List<InterviewerSkillIDModels>();
+
+            // 1 , int1 , 1,2,3  | 2, int2, 3,4 | 
+            // List <interViewerDetails.id == 1 | interViewerDetails.name = int1 | interViewerDetails.skillid = 1,2,3>  
+            foreach (var getSkillId in skillDetails)
+            {
+                IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
+                .Select(skillName => new
+                {
+                   skillName.SkillName,
+                });
+
+                string fetchSkillName = string.Join(",", getSkillName.Select(x=> x.SkillName));
+                getSkillId.SelectedSkillID = fetchSkillName;
+
+            }
+
+
+            return View(skillDetails);
         }
 
         // GET: Jobs/Details/5
