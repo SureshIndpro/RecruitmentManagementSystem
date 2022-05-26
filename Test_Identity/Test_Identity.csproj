@@ -172,9 +172,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CandModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterviewerModelController.cs" />
+    <Compile Include="Controllers\InterviewModelsController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -212,9 +216,32 @@
     <Compile Include="Migrations\202205190553344_jobupdate1.designer.cs">
       <DependentUpon>202205190553344_jobupdate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205261414585_Candmodel.cs" />
+    <Compile Include="Migrations\202205261414585_Candmodel.designer.cs">
+      <DependentUpon>202205261414585_Candmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205261431202_Interviewermodel.cs" />
+    <Compile Include="Migrations\202205261431202_Interviewermodel.designer.cs">
+      <DependentUpon>202205261431202_Interviewermodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205261451566_InterviewModel.cs" />
+    <Compile Include="Migrations\202205261451566_InterviewModel.designer.cs">
+      <DependentUpon>202205261451566_InterviewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205261510559_InterviewModel1.cs" />
+    <Compile Include="Migrations\202205261510559_InterviewModel1.designer.cs">
+      <DependentUpon>202205261510559_InterviewModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205261609539_InterviewModel2.cs" />
+    <Compile Include="Migrations\202205261609539_InterviewModel2.designer.cs">
+      <DependentUpon>202205261609539_InterviewModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CandModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InterviewerModel.cs" />
+    <Compile Include="Models\InterviewModels.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RMSDbContext.cs" />
@@ -224,6 +251,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-1.1.0.css" />
+    <Content Include="Content\bootstrap-1.1.0.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -298,6 +327,26 @@
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\CandModels\Index.cshtml" />
+    <Content Include="Views\CandModels\Details.cshtml" />
+    <Content Include="Views\CandModels\Create.cshtml" />
+    <Content Include="Views\CandModels\Edit.cshtml" />
+    <Content Include="Views\CandModels\Delete.cshtml" />
+    <Content Include="Views\InterviewerModel\Create.cshtml" />
+    <Content Include="Views\InterviewerModel\Delete.cshtml" />
+    <Content Include="Views\InterviewerModel\Details.cshtml" />
+    <Content Include="Views\InterviewerModel\Edit.cshtml" />
+    <Content Include="Views\InterviewerModel\Index.cshtml" />
+    <Content Include="Views\InterviewModels\Create.cshtml" />
+    <Content Include="Views\InterviewModels\Delete.cshtml" />
+    <Content Include="Views\InterviewModels\Details.cshtml" />
+    <Content Include="Views\InterviewModels\Edit.cshtml" />
+    <Content Include="Views\InterviewModels\Index.cshtml" />
+    <Content Include="Views\Result\Create.cshtml" />
+    <Content Include="Views\Result\Delete.cshtml" />
+    <Content Include="Views\Result\Details.cshtml" />
+    <Content Include="Views\Result\Edit.cshtml" />
+    <Content Include="Views\Result\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -339,6 +388,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205190553344_jobupdate1.resx">
       <DependentUpon>202205190553344_jobupdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205261414585_Candmodel.resx">
+      <DependentUpon>202205261414585_Candmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205261431202_Interviewermodel.resx">
+      <DependentUpon>202205261431202_Interviewermodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205261451566_InterviewModel.resx">
+      <DependentUpon>202205261451566_InterviewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205261510559_InterviewModel1.resx">
+      <DependentUpon>202205261510559_InterviewModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205261609539_InterviewModel2.resx">
+      <DependentUpon>202205261609539_InterviewModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

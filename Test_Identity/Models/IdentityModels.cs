@@ -55,5 +55,8 @@ namespace Test_Identity.Models
         public System.Data.Entity.DbSet<Test_Identity.Models.Skills> Skills { get; set; }
 
         public System.Data.Entity.DbSet<Test_Identity.Models.Job> Jobs { get; set; }
+        public DbSet<CandModels> candidatesModels { get; set; }
+        public DbSet<InterviewerModel> interviewerModels { get; set; }
+        public DbSet<InterviewModels> roundInterviews { get; set; }
     }
 }

@@ -1,0 +1,114 @@
+﻿@model Test_Identity.Models.CandModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CandModels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_CTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_CTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expected_CTC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expected_CTC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notice_period)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notice_period)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Current_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Current_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Permanent_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Permanent_address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

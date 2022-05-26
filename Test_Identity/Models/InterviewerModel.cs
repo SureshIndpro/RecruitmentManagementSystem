@@ -7,18 +7,19 @@ using System.Web;
 
 namespace Test_Identity.Models
 {
-    public class Job
+    public class InterviewerModel
     {
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        public string JobName { get; set; }
-        public int Experience { get; set; }
-
-        [Required(ErrorMessage = "Field can't be empty")]
-        public string JobDescription { get; set; }
-
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string Designation { get; set; }
+        [Required, Display(Name = "Available timings")]
+        public DateTime? Timing { get; set; }
+        [Display(Name = "Skills")]
         public string SelectedSkillID { get; set; }
+        //public string SelectedSkillName { get; set; }
 
         [NotMapped]
         public IEnumerable<Skills> SkillCollection { get; set; }

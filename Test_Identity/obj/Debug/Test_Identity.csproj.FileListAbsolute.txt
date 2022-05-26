@@ -231,3 +231,8 @@ C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.pdb
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\bin\Facebook.dll
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\bin\Facebook.xml
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.Candmodel.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.Interviewermodel.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.InterviewModel.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.InterviewModel1.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.InterviewModel2.resources
