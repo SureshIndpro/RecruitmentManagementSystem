@@ -17,32 +17,33 @@ namespace Test_Identity.Controllers
         // GET: Result
         public ActionResult Index()
         {
-            var round = db.roundInterviews.ToList();
+            //var round = db.roundInterviews.ToList();
 
-            foreach (var getSkillId in round)
-            {
-                IEnumerable<int> fetchedCandidatIds = getSkillId.Candidate.ToString().Split(',').Select(Int32.Parse);
-                var getCandidatName = db.candidatesModels.Where(x => fetchedCandidatIds.Contains(x.Id))
-                .Select(candidatName => new
-                {
-                    Name = candidatName.Firstname,
-                });
-                string fetchSkillName = string.Join(",", getCandidatName.Select(x => x.Name));
-                getSkillId.CandidateId = fetchSkillName;
+            //foreach (var getSkillId in round)
+            //{
+            //    IEnumerable<int> fetchedCandidatIds = getSkillId.CandidateId.ToString().Split(',').Select(Int32.Parse);
+            //    var getCandidatName = db.candidatesModels.Where(x => fetchedCandidatIds.Contains(x.Id))
+            //    .Select(candidatName => new
+            //    {
+            //        Name = candidatName.Firstname,
+            //    });
+            //    string fetchSkillName = string.Join(",", getCandidatName.Select(x => x.Name));
+            //    getSkillId.CandidateId = fetchSkillName;
 
-                //if ()
-                //{
-                //    IEnumerable<int> fetchedInterviewIds = getSkillId.Interview.ToString().Split(',').Select(Int32.Parse);
-                //    var getInterviewName = db.interviewerModels.Where(x => fetchedInterviewIds.Contains(x.ID))
-                //    .Select(interviewName => new
-                //    {
-                //        Name = interviewName.Name,
-                //    });
-                //    string fetchInterviewName = string.Join(",", getInterviewName.Select(x => x.Name));
-                //    getSkillId.CandidateId = fetchInterviewName;
-                //}
-            }
-            return View(round);
+            //    //if ()
+            //    //{
+            //    //    IEnumerable<int> fetchedInterviewIds = getSkillId.Interview.ToString().Split(',').Select(Int32.Parse);
+            //    //    var getInterviewName = db.interviewerModels.Where(x => fetchedInterviewIds.Contains(x.ID))
+            //    //    .Select(interviewName => new
+            //    //    {
+            //    //        Name = interviewName.Name,
+            //    //    });
+            //    //    string fetchInterviewName = string.Join(",", getInterviewName.Select(x => x.Name));
+            //    //    getSkillId.CandidateId = fetchInterviewName;
+            //    //}
+            //}
+            //return View(round);
+            return View(db.roundInterviews.ToList());
         }
 
         // GET: Result/Details/5
@@ -60,9 +61,9 @@ namespace Test_Identity.Controllers
             return View(interviewModels);
         }
 
-        // GET: RoundInterviewModels/Create
+       // GET: RoundInterviewModels/Update
 
-        public ActionResult Create()
+        public ActionResult Update()
         {
             InterviewModels model = new InterviewModels();
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -78,7 +79,7 @@ namespace Test_Identity.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(InterviewModels roundInterviewModels)
+        public ActionResult Update(InterviewModels roundInterviewModels)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
@@ -153,8 +154,51 @@ namespace Test_Identity.Controllers
             return RedirectToAction("Index");
         }
 
+        //public ActionResult chkUpdate()
+        //{
+        //    var UpdateDetails = db.roundInterviews.ToList();
+        //    //List<InterviewerSkillIDModels> viewModel = new List<InterviewerSkillIDModels>();
+ 
+        //    foreach (var getUpdateId in UpdateDetails)
+        //    {
+        //        IEnumerable<int> fetchedSkillIds = getUpdateId.isUpdateEnabled.ToString().Split(',').Select(Int32.Parse);
+        //        var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
+        //        .Select(skillName => new
+        //        {
+        //            skillName.SkillName,
+        //         });
 
-        protected override void Dispose(bool disposing)
+        //         string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+        //        getUpdateId.isUpdateEnabled = fetchSkillName;
+
+        //    }
+
+
+        //    return View(UpdateDetails);
+        //}
+
+//[HttpPost]
+//[ValidateAntiForgeryToken]
+//public ActionResult Update([Bind(Include = "Id,Round,CandidateId,InterviewerId,ModeOfInterview,DateTime,Comments,Result,Status")] InterviewModels interviewModels)
+//{
+//    if (ModelState.IsValid)
+//    {
+//        db.Entry(interviewModels).State = EntityState.Modified;
+//        db.SaveChanges();
+//        return RedirectToAction("Index");
+//    }
+//    return View(interviewModels);
+//}
+
+
+//List<InterviewModels> interview = db.Meetings.Where(m.date_meeting.Day.Equals(DateTime.Now.Day) &&
+//                            m.date_meeting.Month.Equals(DateTime.Now.Month) &&
+//                            m.date_meeting.Year.Equals(DateTime.Now.Year) && && x.langId == lang).ToList();
+
+//if (Convert.ToDateTime(Date_Time).Equals(DateTime.Now())){
+//            do stuff
+//     }
+protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

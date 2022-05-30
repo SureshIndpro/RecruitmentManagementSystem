@@ -175,6 +175,7 @@
     <Compile Include="Controllers\CandModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterviewerModelController.cs" />
+    <Compile Include="Controllers\InterviewModels51Controller.cs" />
     <Compile Include="Controllers\InterviewModelsController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -235,6 +236,30 @@
     <Compile Include="Migrations\202205261609539_InterviewModel2.cs" />
     <Compile Include="Migrations\202205261609539_InterviewModel2.designer.cs">
       <DependentUpon>202205261609539_InterviewModel2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270814017_InterviewModel3.cs" />
+    <Compile Include="Migrations\202205270814017_InterviewModel3.designer.cs">
+      <DependentUpon>202205270814017_InterviewModel3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270818186_InterviewModel4.cs" />
+    <Compile Include="Migrations\202205270818186_InterviewModel4.designer.cs">
+      <DependentUpon>202205270818186_InterviewModel4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205270939357_InterviewModel5.cs" />
+    <Compile Include="Migrations\202205270939357_InterviewModel5.designer.cs">
+      <DependentUpon>202205270939357_InterviewModel5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205271011062_InterviewModel6.cs" />
+    <Compile Include="Migrations\202205271011062_InterviewModel6.designer.cs">
+      <DependentUpon>202205271011062_InterviewModel6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205271543152_InterviewModel7.cs" />
+    <Compile Include="Migrations\202205271543152_InterviewModel7.designer.cs">
+      <DependentUpon>202205271543152_InterviewModel7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205300822075_updateInterviewTable.cs" />
+    <Compile Include="Migrations\202205300822075_updateInterviewTable.designer.cs">
+      <DependentUpon>202205300822075_updateInterviewTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -342,11 +367,17 @@
     <Content Include="Views\InterviewModels\Details.cshtml" />
     <Content Include="Views\InterviewModels\Edit.cshtml" />
     <Content Include="Views\InterviewModels\Index.cshtml" />
-    <Content Include="Views\Result\Create.cshtml" />
+    <Content Include="Views\Result\Update.cshtml" />
     <Content Include="Views\Result\Delete.cshtml" />
     <Content Include="Views\Result\Details.cshtml" />
     <Content Include="Views\Result\Edit.cshtml" />
     <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\InterviewModels51\Create.cshtml" />
+    <Content Include="Views\InterviewModels51\Delete.cshtml" />
+    <Content Include="Views\InterviewModels51\Details.cshtml" />
+    <Content Include="Views\InterviewModels51\Update.cshtml" />
+    <Content Include="Views\InterviewModels51\Index.cshtml" />
+    <Content Include="Views\InterviewModels51\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -403,6 +434,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205261609539_InterviewModel2.resx">
       <DependentUpon>202205261609539_InterviewModel2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270814017_InterviewModel3.resx">
+      <DependentUpon>202205270814017_InterviewModel3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270818186_InterviewModel4.resx">
+      <DependentUpon>202205270818186_InterviewModel4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205270939357_InterviewModel5.resx">
+      <DependentUpon>202205270939357_InterviewModel5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205271011062_InterviewModel6.resx">
+      <DependentUpon>202205271011062_InterviewModel6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205271543152_InterviewModel7.resx">
+      <DependentUpon>202205271543152_InterviewModel7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205300822075_updateInterviewTable.resx">
+      <DependentUpon>202205300822075_updateInterviewTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

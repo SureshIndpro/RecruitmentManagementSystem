@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.ModeOfInterview)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Date_Time)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Comments)
@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.Result)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.RecruitmentStatus)
         </th>
         <th></th>
     </tr>
@@ -53,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.ModeOfInterview)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateTime)
+            @Html.DisplayFor(modelItem => item.Date_Time)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Comments)
@@ -62,7 +62,7 @@
             @Html.DisplayFor(modelItem => item.Result)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @Html.DisplayFor(modelItem => item.RecruitmentStatus)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

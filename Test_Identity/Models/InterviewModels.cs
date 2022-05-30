@@ -21,18 +21,33 @@ namespace Test_Identity.Models
         public string ModeOfInterview { get; set; }
       
         [Display(Name = "Date and time of Interview")]
-        [DataType(DataType.Date)]
+        
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime? DateTime { get; set; }
+        public DateTime? Date_Time { get; set; }
+
+        [Required]
+        [Display(Name = "Result Comment")]
         public string Comments { get; set; }
-        public string Result { get; set; }
-        public string Status { get; set; }
+
+        public bool? isUpdateEnabled { get; set; }
 
         [NotMapped]
         public IEnumerable<CandModels> Candidate { get; set; }
 
         [NotMapped]
         public IEnumerable<InterviewerModel> Interview { get; set; }
+
+        [Display(Name = "Result")]
+        public StatusId Results { get; set; }
+
+        public enum StatusId
+        {
+            Selected=1, 
+            Selected_for_next_round=2, 
+            On_hold=3, 
+            Rejected=4, 
+            Interview_not_taken=5
+        }
 
     }
 }
