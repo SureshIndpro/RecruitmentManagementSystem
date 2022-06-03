@@ -36,17 +36,23 @@ namespace Test_Identity.Models
 
         [NotMapped]
         public IEnumerable<InterviewerModel> Interview { get; set; }
+        public string SelectedSkillID { get; set; }
+
+        [NotMapped]
+        public IEnumerable<Skills> SkillCollection { get; set; }
+        [NotMapped]
+        public string[] SelectedIDArray { get; set; }
 
         [Display(Name = "Result")]
         public StatusId Results { get; set; }
 
         public enum StatusId
         {
-            Selected=1, 
-            Selected_for_next_round=2, 
-            On_hold=3, 
-            Rejected=4, 
-            Interview_not_taken=5
+            Selected, 
+            Selected_for_next_round, 
+            On_hold, 
+            Rejected, 
+            Interview_not_taken
         }
 
     }

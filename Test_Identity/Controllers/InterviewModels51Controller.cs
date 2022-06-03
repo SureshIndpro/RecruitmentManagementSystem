@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Test_Identity.Models;
+using static Test_Identity.Models.InterviewModels;
 
 namespace Test_Identity.Controllers
 {
@@ -18,7 +20,25 @@ namespace Test_Identity.Controllers
         // GET: InterviewModels51
         public ActionResult Index()
         {
-            return View(db.roundInterviews.ToList());
+            var round = db.roundInterviews.ToList();
+
+            foreach (var getSkillId in round)
+            {
+                IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
+                .Select(skillName => new
+                {
+                    skillName.SkillName,
+                });
+
+                string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+                getSkillId.SelectedSkillID = fetchSkillName;
+
+            }
+
+
+            return View(round);
+            //return View(db.roundInterviews.ToList());
         }
 
         // GET: InterviewModels51/Details/5
@@ -39,7 +59,13 @@ namespace Test_Identity.Controllers
         // GET: InterviewModels51/Create
         public ActionResult Create()
         {
-            return View();
+            InterviewModels interviewModels = new InterviewModels();
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                interviewModels.SkillCollection = db.Skills.ToList();
+            }
+            return View(interviewModels);
+            // return View();
         }
 
         // POST: InterviewModels51/Create
@@ -81,7 +107,7 @@ namespace Test_Identity.Controllers
             {
                 return View(interviewModels);
             }
-            //TempData["message"] = "Cannot be edit.";
+            //TempData["message"] = "Update is disable , please wait till interview get over.";
             return RedirectToAction("Index", "InterviewModels51");
         }
 
@@ -104,9 +130,8 @@ namespace Test_Identity.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch (RetryLimitExceededException /* dex */)
+                catch (RetryLimitExceededException)
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
@@ -165,6 +190,53 @@ namespace Test_Identity.Controllers
             return RedirectToAction("Index");
         }
 
+        //[Authorize(Roles = "Administrator,Recruiter")]
+        public JsonResult GetSearchingData(string SearchBy,string SearchValue)
+        {
+            var interviewModels = db.roundInterviews.ToList();
+
+            foreach (var getSkillId in interviewModels)
+            {
+                IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
+                .Select(skillName => new
+                {
+                    skillName.SkillName,
+                });
+
+                string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+                getSkillId.SelectedSkillID = fetchSkillName;
+
+            }
+
+            foreach (var getResult in interviewModels)
+            {
+                StatusId st = getResult.Results;
+                string str = Convert.ToString(st);
+            }
+
+
+            if (SearchBy == "Id")
+            {
+                try
+                {
+                    int ID = Convert.ToInt32(SearchValue);
+                    interviewModels = db.roundInterviews.Where(x=>x.Id == ID || SearchValue==null).ToList();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("{0} is not an Id",SearchValue);
+                }
+                
+                return Json(interviewModels, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                interviewModels = db.roundInterviews.Where(x => x.InterviewerId.Contains(SearchValue) || SearchValue == null).ToList();
+                return Json(interviewModels, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

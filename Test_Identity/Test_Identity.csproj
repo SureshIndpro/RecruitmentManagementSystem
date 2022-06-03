@@ -261,6 +261,18 @@
     <Compile Include="Migrations\202205300822075_updateInterviewTable.designer.cs">
       <DependentUpon>202205300822075_updateInterviewTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205301627172_updateInterviewTable1.cs" />
+    <Compile Include="Migrations\202205301627172_updateInterviewTable1.designer.cs">
+      <DependentUpon>202205301627172_updateInterviewTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206030604220_resultInter.cs" />
+    <Compile Include="Migrations\202206030604220_resultInter.designer.cs">
+      <DependentUpon>202206030604220_resultInter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206030636083_resultInter1.cs" />
+    <Compile Include="Migrations\202206030636083_resultInter1.designer.cs">
+      <DependentUpon>202206030636083_resultInter1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CandModels.cs" />
@@ -376,8 +388,8 @@
     <Content Include="Views\InterviewModels51\Delete.cshtml" />
     <Content Include="Views\InterviewModels51\Details.cshtml" />
     <Content Include="Views\InterviewModels51\Update.cshtml" />
-    <Content Include="Views\InterviewModels51\Index.cshtml" />
     <Content Include="Views\InterviewModels51\Edit.cshtml" />
+    <Content Include="Views\InterviewModels51\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -452,6 +464,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205300822075_updateInterviewTable.resx">
       <DependentUpon>202205300822075_updateInterviewTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205301627172_updateInterviewTable1.resx">
+      <DependentUpon>202205301627172_updateInterviewTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206030604220_resultInter.resx">
+      <DependentUpon>202206030604220_resultInter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206030636083_resultInter1.resx">
+      <DependentUpon>202206030636083_resultInter1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

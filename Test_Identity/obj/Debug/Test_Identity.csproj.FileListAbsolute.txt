@@ -236,9 +236,12 @@ C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.InterviewModel5.resources
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.InterviewModel6.resources
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.InterviewModel7.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.updateInterviewTable.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.updateInterviewTable1.resources
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.csproj.GenerateResource.cache
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.csproj.CoreCompileInputs.cache
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.csproj.CopyComplete
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.dll
 C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.pdb
-C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.updateInterviewTable.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.resultInter.resources
+C:\IndPro\RMS\RecruitmentManagementSystem\Test_Identity\obj\Debug\Test_Identity.Migrations.resultInter1.resources
