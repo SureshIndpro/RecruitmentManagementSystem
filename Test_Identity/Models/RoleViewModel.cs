@@ -7,7 +7,7 @@ namespace Test_Identity.Models
 {
     public class RoleViewModel
     {
-        public RoleViewModel() { }
+       // public RoleViewModel() { }
 
         public RoleViewModel(ApplicationRole role)
         {

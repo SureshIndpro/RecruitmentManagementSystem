@@ -26,5 +26,6 @@ namespace Test_Identity.Models
 
         [NotMapped]
         public string[] SelectedIDArray { get; set; }
+
     }
 }

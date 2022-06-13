@@ -14,6 +14,6 @@ namespace Test_Identity.Models
         }
         public DbSet<Skills> skill { get; set; }
         public DbSet<Job> job { get; set; }
-        public object Registrations { get; internal set; }
+        public DbSet<RegisterViewModel> Registrations { get; internal set; }
     }
 }

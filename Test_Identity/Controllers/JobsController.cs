@@ -10,7 +10,7 @@ using Test_Identity.Models;
 
 namespace Test_Identity.Controllers
 {
-   [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     public class JobsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,21 +19,18 @@ namespace Test_Identity.Controllers
         public ActionResult Index()
         {
             var skillDetails = db.Jobs.ToList();
-            //List<InterviewerSkillIDModels> viewModel = new List<InterviewerSkillIDModels>();
-
-            // 1 , int1 , 1,2,3  | 2, int2, 3,4 | 
-            // List <interViewerDetails.id == 1 | interViewerDetails.name = int1 | interViewerDetails.skillid = 1,2,3>  
+            
             foreach (var getSkillId in skillDetails)
             {
                 IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
                 var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
                 .Select(skillName => new
                 {
-                   skillName.SkillName,
+                    skillName.SkillName,
                 });
 
-                string fetchSkillName = string.Join(",", getSkillName.Select(x=> x.SkillName));
-                getSkillId.SelectedSkillID = fetchSkillName;
+                string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+               getSkillId.SelectedSkillID = fetchSkillName;
 
             }
 
@@ -71,7 +68,7 @@ namespace Test_Identity.Controllers
         public ActionResult Create(Job job)
         {
             job.SelectedSkillID = string.Join(",", job.SelectedIDArray);
-            
+
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 db.Jobs.Add(job);
@@ -79,29 +76,6 @@ namespace Test_Identity.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        //// GET: Jobs/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Jobs/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,JobName,Experience,JobDescription,SelectedSkillID")] Job job)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Jobs.Add(job);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(job);
-        //}
 
         // GET: Jobs/Edit/5
         public ActionResult Edit(int id = 0)

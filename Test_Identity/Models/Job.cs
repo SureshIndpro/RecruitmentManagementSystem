@@ -17,7 +17,10 @@ namespace Test_Identity.Models
 
         [Required(ErrorMessage = "Field can't be empty")]
         public string JobDescription { get; set; }
+        //public int skillId { get; set; }
 
+        //[ForeignKey("skillId")]
+        //public Skills Skills { get; set; }
         public string SelectedSkillID { get; set; }
 
         [NotMapped]
@@ -25,5 +28,6 @@ namespace Test_Identity.Models
 
         [NotMapped]
         public string[] SelectedIDArray { get; set; }
+
     }
 }

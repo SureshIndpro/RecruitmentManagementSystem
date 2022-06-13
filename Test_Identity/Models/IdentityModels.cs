@@ -58,5 +58,7 @@ namespace Test_Identity.Models
         public DbSet<CandModels> candidatesModels { get; set; }
         public DbSet<InterviewerModel> interviewerModels { get; set; }
         public DbSet<InterviewModels> roundInterviews { get; set; }
+        public DbSet<RecruiterModel> recruiters { get; set; }
+        public DbSet<InterviewViewModel> ivm { get; set; }
     }
 }
