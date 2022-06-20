@@ -127,7 +127,8 @@ namespace Test_Identity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            InterviewModels interviewModels = db.roundInterviews.Find(id);
+            // InterviewModels interviewModels = db.roundInterviews.Find(id);
+            var interviewModels = db.roundInterviews.Include(x => x.Candidate).Include(z=>z.Interview).Where(y => y.Id == id).FirstOrDefault();
             DateTime InterviewDate = (DateTime)interviewModels.Date_Time;
 
             int result = DateTime.Compare(currentDate, InterviewDate);
@@ -155,6 +156,7 @@ namespace Test_Identity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             InterviewModels interviewModels = db.roundInterviews.Find(id);
+           
             // var resultToUpdate = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
             if (TryUpdateModel(interviewModels, "",
                new string[] { "Results", "Comments" }))
@@ -252,7 +254,14 @@ namespace Test_Identity.Controllers
 
                 string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
                 getSkillId.SelectedSkillID = fetchSkillName;
+
+                
             }
+            foreach(var inter in interviewModels)
+            {
+                var a = inter.Round.ToString().ToList();
+            }
+           
 
             if (SearchBy == "Id")
             {
@@ -280,8 +289,8 @@ namespace Test_Identity.Controllers
             //}
             else
             {
-                //interviewModels = db.roundInterviews.Where(x => x.Interview.Name.Contains(SearchValue) || x.Date_Time.ToString().Contains(SearchValue) || x.Results.ToString().Contains(SearchValue) || x.Jobs.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
-                interviewModels = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue)).Where(x => x.Interview.Name.Contains(SearchValue)).Where(x=> x.Date_Time.ToString().Contains(SearchValue)).ToList();
+                interviewModels = db.roundInterviews.Where(x => x.Interview.Name.Contains(SearchValue) || x.Date_Time.ToString().Contains(SearchValue) || x.Results.ToString().Contains(SearchValue) || x.Jobs.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
+                //interviewModels = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue)).Where(x => x.Interview.Name.Contains(SearchValue)).Where(x=> x.Date_Time.ToString().Contains(SearchValue)).ToList();
                 return Json(interviewModels, JsonRequestBehavior.AllowGet);
             }
 

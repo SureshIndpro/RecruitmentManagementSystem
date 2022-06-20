@@ -13,9 +13,9 @@ namespace Test_Identity.ViewModels
         public List<InterviewModels> InterviewDetails { get; set; }
         public List<Job> Jobs { get; set; }
 
-        //public CandModels Cand { get; set; }
-        //public InterviewerModel Interviewer { get; set; }
-        //public InterviewModels InterviewDetails { get; set; }
-        //public Job Jobs { get; set; }
+        //public List<CandModels> Cand { get; set; }
+        ////public InterviewerModel Interviewer { get; set; }
+        //public lIST<InterviewModels> InterviewDetails { get; set; }
+        ////public Job Jobs { get; set; }
     }
 }

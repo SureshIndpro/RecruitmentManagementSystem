@@ -1,0 +1,182 @@
+﻿@*@model IEnumerable<Test_Identity.ViewModels.InterviewTableViewModel>*@
+@model Test_Identity.ViewModels.InterviewTableViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="text-align:center">Index</h2>
+<div class="container">
+    <b>Search by:</b>
+    <select id="SearchBy">
+        @*<option value="Id">Id</option>*@
+        <option value="SelectedSkillID">Skill Name</option>
+        <option value="Results">Results</option>
+        <option value="InterviewerId">Interviewer</option>
+        <option value="Date_Time">Interview Date</option>
+    </select><br /><br />
+    @Html.TextBox("Search")<input type="submit" id="SearchBtn" value="Search" /><br /><br />
+
+    @*To show all details in table from database*@
+
+<table class="table table-bordered">
+    
+    <tbody id="DataSearching">
+     <tr></tr>
+    <td><b>Round</b></td>
+    @foreach (var item in Model.InterviewDetails)
+    {
+
+        <td>@item.Round</td>
+
+    }
+    <tr></tr>
+    <td><b>Candidate</b></td>
+    @foreach (var item in Model.Cand)
+    {
+
+
+
+        <td>@item.Firstname</td>
+
+    }
+    <tr></tr>
+    <td><b>Interviewer</b></td>
+
+    @foreach (var item in Model.Interviewer)
+    {
+        <td>@item.Name</td>
+
+    }
+    <tr></tr>
+    <td><b>Job Name</b></td>
+    @foreach (var item in Model.Jobs)
+    {
+
+        <td>@item.JobName</td>
+
+    }
+    <tr></tr>
+    <td><b>Job Description</b></td>
+    @foreach (var item in Model.Jobs)
+    {
+
+        <td>@item.JobDescription</td>
+
+    }
+    <tr></tr>
+    <td><b>Skills</b></td>
+    @foreach (var item in Model.Jobs)
+    {
+
+        <td>@item.SelectedSkillID</td>
+
+    }
+    <tr></tr>
+    <td><b>Mode Of Interview</b></td>
+
+    @foreach (var item in Model.InterviewDetails)
+    {
+
+        <td>@item.ModeOfInterview</td>
+
+
+
+    }
+    <tr></tr>
+    <td><b>Date</b></td>
+
+    @foreach (var item in Model.InterviewDetails)
+    {
+        <td>@item.Date_Time</td>
+    }
+    <tr></tr>
+    <td><b>Result Status</b></td>
+
+    @foreach (var item in Model.InterviewDetails)
+    {
+        <td> @item.Results</td>
+    }
+    <tr></tr>
+    <td><b>Comments</b></td>
+
+    @foreach (var item in Model.InterviewDetails)
+    {
+        <td>@item.Comments</td>
+
+    }
+
+    <tr></tr>
+    <td> </td>
+    @foreach (var item in Model.InterviewDetails)
+    {
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+            @Html.ActionLink("Update Result", "Update", new { id = item.Id })
+        </td>
+    }</tbody>
+
+</table>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#SearchBtn").click(function () {
+            var SearchBy = $("#SearchBy").val();
+            var SearchValue = $("#Search").val();
+            var SetData = $("#DataSearching");
+            SetData.html("");
+            $.ajax({
+                type: "post",
+                url: "/InterviewModel/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                contentType: "html",
+                success: function (result) {
+                    console.log(result);
+                    if (result.length == 0) {
+                        SetData.append('<tr style="color:red"><td colspan = "3">NO DATA MATCHED</td></tr>')
+                    }
+                    else {
+
+                        $.each(result, function (index, value) {
+                            var dt = new Date(parseInt(value.Date_Time.replace('/Date(', '')))
+                            var dtFinal = AddLeadingZeros(dt.getDate(), 2) + '-' +
+                                AddLeadingZeros(dt.getMonth() + 1, 2) + '-' +
+                                AddLeadingZeros(dt.getFullYear(), 4) + ' ' +
+                                AddLeadingZeros(dt.getHours(), 2) + ':' +
+                                AddLeadingZeros(dt.getMinutes(), 2)
+
+                            var Data = "<tr>" +
+                                "<td>" + value.Round + "</td>" +
+                                "<td>" + value.Candidate.Firstname + "</td>" +
+                                "<td>" + value.Interview.Name + "</td>" +
+                                "<td>" + value.Jobs.JobName + "</td>" +
+                                "<td>" + value.Jobs.JobDescription + "</td>" +
+                                "<td>" + value.ModeOfInterview + "</td>" +
+                                "<td>" + dtFinal + "</td>" +
+                                "<td>" + value.Jobs.SelectedSkillID + "</td>" +
+                                "<td>" + value.Results + "</td>" +
+                                "<td>" + value.Comments + "</td>" +
+                                "</tr>";
+
+                            SetData.append(Data);
+                        });
+                    }
+                }
+            });
+            function AddLeadingZeros(number, size) {
+                var s = "0000" + number;
+                return s.substr(s.length - size);
+            }
+        });
+    });
+</script>
+<p>
+    @Html.ActionLink("All Interviews", "ShowSchedule")
+</p>
+<p>
+    @Html.ActionLink("Schedule an Interview", "Create", "InterviewModel")
+</p>

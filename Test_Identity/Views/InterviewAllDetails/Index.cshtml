@@ -1,11 +1,38 @@
-﻿@model IEnumerable<Test_Identity.ViewModels.InterviewTableViewModel>
+﻿@*@model IEnumerable<Test_Identity.ViewModels.InterviewTableViewModel>*@
+@model Test_Identity.ViewModels.InterviewTableViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2 style="text-align:center">Index</h2>
+<head>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+            width: 20px;
+            margin: 0px;
+            
+        }
 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            padding:0px;
+            margin:auto;
+        }
+
+        th {
+            height: 70px;
+            margin: 0px;
+        }
+
+        .header {
+            border: 2px solid black;
+ 
+        }
+    </style>
+</head>
 <div class="container">
     <b>Search by:</b>
     <select id="SearchBy">
@@ -14,104 +41,302 @@
         <option value="Results">Results</option>
         <option value="InterviewerId">Interviewer</option>
         <option value="Date_Time">Interview Date</option>
-    </select><br /><br /> 
+    </select><br /><br />
     @Html.TextBox("Search")<input type="submit" id="SearchBtn" value="Search" /><br /><br />
 
     @*To show all details in table from database*@
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Round</th>
-                <th>Candidate Name</th>
-                <th>Interviewer Name</th>
-                <th>Job Name</th>
-                <th>Job Description</th>
-                <th>Mode of Interview</th>
-                <th>Date of Interview</th>
-                <th>Skill Name</th>
-                <th>Result</th>
-                <th>Comment</th>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead class="header"><b>Round</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.Round)
+                                </td>
+                            </tr>
 
-            </tr>
-        </thead>
-        <tbody id="DataSearching">
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.InterviewDetails.Select(x=>x.Round).FirstOrDefault()</td>
-                    <td>@item.Cand.Select(x=>x.Firstname).FirstOrDefault()</td>
-                    <td>@item.Interviewer.Select(x => x.Name).FirstOrDefault()</td>
-                    <td>@item.Jobs.Select(x => x.JobName).FirstOrDefault()</td>
-                    <td>@item.Jobs.Select(x => x.JobDescription).FirstOrDefault()</td>
-                    <td>@item.InterviewDetails.Select(x => x.ModeOfInterview).FirstOrDefault()</td>
-                    <td>@item.InterviewDetails.Select(x => x.Date_Time).FirstOrDefault()</td>
-                    <td>@item.Jobs.Select(x => x.SelectedSkillID).FirstOrDefault()</td>
-                    <td>@item.InterviewDetails.Select(x => x.Results).FirstOrDefault()</td>
-                    <td>@item.InterviewDetails.Select(x => x.Comments).FirstOrDefault()</td>
-                   
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.InterviewDetails.Select(x => x.Id) }) |
-        @Html.ActionLink("Details", "Details", new { id = item.InterviewDetails.Select(x => x.Id) }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.InterviewDetails.Select(x => x.Id) }) |
-        @Html.ActionLink("Update Result", "Update", new { id = item.InterviewDetails.Select(x => x.Id) })
-    </td>
-    </tr>
-
-}
-            </tbody>
-            </table>
+                        }
+                    </tbody>
+                </table>
             </div>
-            @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-            <script>
-        $(document).ready(function () {
-            $("#SearchBtn").click(function () {
-                var SearchBy = $("#SearchBy").val();
-                var SearchValue = $("#Search").val();
-                var SetData = $("#DataSearching");
-                SetData.html("");
-                $.ajax({
-                    type: "post",
-                    url: "/InterviewModel/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
-                    contentType: "html",
-                    success: function (result) {
-                        console.log(result);
-                        if (result.length == 0) {
-                            SetData.append('<tr style="color:red"><td colspan = "3">NO DATA MATCHED</td></tr>')
-                        }
-                        else {
+            <div class="col-lg">
+                <table class="table table-bordered">
+                    <thead class="header"><b>Candidate</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.Cand)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.Firstname)
+                                </td>
+                            </tr>
 
-                            $.each(result, function (index, value) {
-                                var dt = new Date(parseInt(value.Date_Time.replace('/Date(', '')))
-                                var dtFinal = AddLeadingZeros(dt.getDate(), 2) + '-' +
-                                    AddLeadingZeros(dt.getMonth() + 1, 2) + '-' +
-                                    AddLeadingZeros(dt.getFullYear(), 4) + ' ' +
-                                    AddLeadingZeros(dt.getHours(), 2) + ':' +
-                                    AddLeadingZeros(dt.getMinutes(), 2)
-                                var Data = "<tr>" +
-                                    "<td>" + value.Round + "</td>" +
-                                    "<td>" + value.Candidate.Firstname + "</td>" +
-                                    "<td>" + value.Interview.Name + "</td>" +
-                                    "<td>" + value.Jobs.JobName + "</td>" +
-                                    "<td>" + value.Jobs.JobDescription + "</td>" +
-                                    "<td>" + value.ModeOfInterview + "</td>" +
-                                    "<td>" + dtFinal + "</td>" +
-                                    "<td>" + value.Jobs.SelectedSkillID + "</td>" +
-                                    "<td>" + value.Results + "</td>" +
-                                    "<td>" + value.Comments + "</td>" +
-                                    "</tr>";
-
-                                SetData.append(Data);
-                            });
                         }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table cellspacing="10"class="table table-bordered">
+                    <thead class="header"><b>Interviewer_Name</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.Interviewer)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.Name)
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+
+                    <thead><b>Job_Role_Discription</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.Jobs)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.JobName)
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @*<div class="col-sm">
+            <table>
+                <thead class="header">Job Description</thead>
+                <tbody>
+                    @foreach (var cc in Model.Jobs)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => cc.JobDescription)
+                            </td>
+                        </tr>
+
                     }
-                });
-                function AddLeadingZeros(number, size) {
-                    var s = "0000" + number;
-                    return s.substr(s.length - size);
+                </tbody>
+            </table>
+        </div>*@
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Interview_Mode</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.ModeOfInterview)
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Date$Time_of_Interview</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.Date_Time)
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Skill</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.Jobs)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.SelectedSkillID)
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Result</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => cc.Results)
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Comment</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+
+                                <td>@Html.DisplayFor(modelItem => cc.Comments)</td>
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Edit</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = cc.Id })
+                                </td>
+                             
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Details</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", new { id = cc.Id }) |
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Delete</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Delete", "Delete", new { id = cc.Id }) |
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead><b>Update_Result</b></thead>
+                    <tbody>
+                        @foreach (var cc in Model.InterviewDetails)
+                        {
+                            <tr>
+
+                                <td>
+                                    <div class="@("Update " + (cc.Results>0 ? "show" : "hide"))">
+                                        @Html.ActionLink("Update Result", "Update", new { id = cc.Id })
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#SearchBtn").click(function () {
+            var SearchBy = $("#SearchBy").val();
+            var SearchValue = $("#Search").val();
+            var SetData = $("#DataSearching");
+            SetData.html("");
+            $.ajax({
+                type: "post",
+                url: "/InterviewModel/GetSearchingData?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                contentType: "html",
+                success: function (result) {
+                    console.log(result);
+                    if (result.length == 0) {
+                        SetData.append('<tr style="color:red"><td colspan = "3">NO DATA MATCHED</td></tr>')
+                    }
+                    else {
+
+                        $.each(result, function (index, value) {
+                            var dt = new Date(parseInt(value.Date_Time.replace('/Date(', '')))
+                            var dtFinal = AddLeadingZeros(dt.getDate(), 2) + '-' +
+                                AddLeadingZeros(dt.getMonth() + 1, 2) + '-' +
+                                AddLeadingZeros(dt.getFullYear(), 4) + ' ' +
+                                AddLeadingZeros(dt.getHours(), 2) + ':' +
+                                AddLeadingZeros(dt.getMinutes(), 2)
+
+                            var Data = "<tr>" +
+                                "<td>" + value.Round + "</td>" +
+                                "<td>" + value.Candidate.Firstname + "</td>" +
+                                "<td>" + value.Interview.Name + "</td>" +
+                                "<td>" + value.Jobs.JobName + "</td>" +
+                                "<td>" + value.Jobs.JobDescription + "</td>" +
+                                "<td>" + value.ModeOfInterview + "</td>" +
+                                "<td>" + dtFinal + "</td>" +
+                                "<td>" + value.Jobs.SelectedSkillID + "</td>" +
+                                "<td>" + value.Results + "</td>" +
+                                "<td>" + value.Comments + "</td>" +
+                                "</tr>";
+
+                            SetData.append(Data);
+                        });
+                    }
                 }
             });
+            function AddLeadingZeros(number, size) {
+                var s = "0000" + number;
+                return s.substr(s.length - size);
+            }
         });
-            </script>*@
-            <p>
-                @Html.ActionLink("Schedule an Interview", "Create")
-            </p>
+    });
+</script>
+<p>
+    @Html.ActionLink("All Interviews", "ShowSchedule")
+</p>
+<p>
+    @Html.ActionLink("Schedule an Interview", "Create", "InterviewModel")
+</p>
