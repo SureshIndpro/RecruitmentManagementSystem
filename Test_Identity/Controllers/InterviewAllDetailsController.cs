@@ -23,7 +23,19 @@ namespace Test_Identity.Controllers
             var interviewScheduler = new List<InterviewModels>();
 
             var interviewObj = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
+            var jobObject = db.Jobs.ToList();
+            foreach (var getSkillId in jobObject)
+            {
+                IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
+                .Select(skillName => new
+                {
+                    skillName.SkillName
+                });
 
+                string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+                getSkillId.SelectedSkillID = fetchSkillName;
+            }
             foreach (var intervewData in interviewObj)
             {
                
@@ -189,9 +201,6 @@ namespace Test_Identity.Controllers
                 Job.Add(new Job { JobName = intervewData.Jobs.JobName, JobDescription = intervewData.Jobs.JobDescription, SelectedSkillID = intervewData.Jobs.SelectedSkillID });
 
             }
-            
-           
-
             InterviewTableViewModel IVM = new InterviewTableViewModel
             {
 
@@ -200,6 +209,7 @@ namespace Test_Identity.Controllers
                 Interviewer = Interviewer,
                 Jobs = Job
             };
+           
 
             return View(IVM);
         }
