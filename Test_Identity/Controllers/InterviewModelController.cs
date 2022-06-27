@@ -311,7 +311,20 @@ namespace Test_Identity.Controllers
         }
         public ActionResult Index1(string SearchBy, string SearchValue,int? id=45)
         {
-             var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
+            var jobObject0 = db.Jobs.ToList();
+            foreach (var getSkillId in jobObject0)
+            {
+                IEnumerable<int> fetchedSkillIds1 = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                var getSkillName = db.Skills.Where(x => fetchedSkillIds1.Contains(x.SkillId))
+                .Select(skillName => new
+                {
+                    skillName.SkillName
+                });
+
+                string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+                getSkillId.SelectedSkillID = fetchSkillName;
+            }
+            var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
             var jobObject = db.Jobs.ToList();
             InterviewModels interviewModels = db.roundInterviews.Find(id);
 
@@ -327,19 +340,19 @@ namespace Test_Identity.Controllers
                 {
 
                     var roundInterview = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
-                    var jobObject1 = db.Jobs.ToList();
-                    foreach (var getSkillId in jobObject1)
-                    {
-                        IEnumerable<int> fetchedSkillIds1 = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
-                        var getSkillName = db.Skills.Where(x => fetchedSkillIds1.Contains(x.SkillId))
-                        .Select(skillName => new
-                        {
-                            skillName.SkillName
-                        });
+                    //var jobObject1 = db.Jobs.ToList();
+                    //foreach (var getSkillId in jobObject1)
+                    //{
+                    //    IEnumerable<int> fetchedSkillIds1 = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                    //    var getSkillName = db.Skills.Where(x => fetchedSkillIds1.Contains(x.SkillId))
+                    //    .Select(skillName => new
+                    //    {
+                    //        skillName.SkillName
+                    //    });
 
-                        string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
-                        getSkillId.SelectedSkillID = fetchSkillName;
-                    }
+                    //    string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
+                    //    getSkillId.SelectedSkillID = fetchSkillName;
+                    //}
                     var filterData = roundInterview.Where(x => x.Jobs.SelectedSkillID.ToLower().Contains(SearchValue.ToLower())).ToList();
                     return View(filterData);
 

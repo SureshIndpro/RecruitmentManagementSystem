@@ -20,31 +20,32 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Candidate.Firstname)
+            Round
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Interview.Name)
+            Candidate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Jobs.JobName)
+            Interviewer
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Round)
+            Job
+        </th>
+
+        <th>
+            ModeOfInterview
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ModeOfInterview)
+            Date and Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date_Time)
+            Comments
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comments)
+            Results
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Results)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Jobs.SelectedSkillID)
+            Skills
         </th>
         <th></th>
     </tr>
@@ -52,6 +53,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Round)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Candidate.Firstname)
             </td>
@@ -61,9 +65,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Jobs.JobName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Round)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.ModeOfInterview)
             </td>
