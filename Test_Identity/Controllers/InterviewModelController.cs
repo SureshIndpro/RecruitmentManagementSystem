@@ -239,15 +239,11 @@ namespace Test_Identity.Controllers
         //Search and Filter
         public JsonResult GetSearchingData(string SearchBy, string SearchValue, int? id)
         {
-            //var interviewModels = db.roundInterviews.ToList();
-            //List<InterviewModels> interviewModels = new List<InterviewModels>();
-            var interviewModels = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
-            // var res = db.roundInterviews.Where(a => a.Interview.Name.ToLower().Contains(SearchValue) || a.Date_Time.ToString().Contains(SearchValue));
-            var jobObject = db.Jobs.ToList();
-            foreach (var getSkillId in jobObject)
+            var jobObject0 = db.Jobs.ToList();
+            foreach (var getSkillId in jobObject0)
             {
-                IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
-                var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
+                IEnumerable<int> fetchedSkillIds1 = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
+                var getSkillName = db.Skills.Where(x => fetchedSkillIds1.Contains(x.SkillId))
                 .Select(skillName => new
                 {
                     skillName.SkillName
@@ -255,59 +251,35 @@ namespace Test_Identity.Controllers
 
                 string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
                 getSkillId.SelectedSkillID = fetchSkillName;
-                
+            }
+            var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
+            var jobObject = db.Jobs.ToList();
+            InterviewModels interviewModels = db.roundInterviews.Find(id);
+
+            if (SearchBy == "Name")
+            {
+                var model = db.roundInterviews.Where(x => x.Interview.Name.Contains(SearchValue) || SearchValue == null).ToList();
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            else if (SearchBy == "SelectedSkillID")
+            {
+                var roundInterview = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
+                var jobObject1 = db.Jobs.ToList();
+               
+                var filterData = roundInterview.Where(x => x.Jobs.SelectedSkillID.ToLower().Contains(SearchValue.ToLower())).ToList();
+                return Json(filterData, JsonRequestBehavior.AllowGet);
 
             }
-            foreach(var inter in interviewModels)
-            {
-                var a = inter.Round.ToString().ToList();
-            }
-
-            var value = SearchValue.ToString();
-            if (SearchBy == "Id")
-            {
-                try
-                {
-                    int ID = Convert.ToInt32(SearchValue);
-                    interviewModels = db.roundInterviews.Where(x => x.Id == ID || SearchValue == null).ToList();
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("{0} is not an Id", SearchValue);
-                }
-
-                return Json(interviewModels, JsonRequestBehavior.AllowGet);
-            }
-            //else if(SearchBy =="Interview.Name")
-            //{
-            //    interviewModels = db.roundInterviews.Where(x => x.Interview.Name.Contains(SearchValue) || SearchValue == null).ToList();
-            //    return Json(interviewModels, JsonRequestBehavior.AllowGet);
-            //}
-            //else if (SearchBy == "SelectedSkillID")
-            //{
-            //    interviewModels = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue)).ToList();
-            //    //var a = db.Jobs.Where(x => x.SelectedSkillID.Contains(SearchValue));
-            //    //    interviewModels = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
-            //    return Json(interviewModels, JsonRequestBehavior.AllowGet);
-            //}
-            else if (SearchBy == "SelectedSkillID" && SearchValue == "value")
-            {
-                var abc = db.Jobs.Where(x => x.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
-                return Json(abc, JsonRequestBehavior.AllowGet);
+            else if (SearchBy == "Results")
+            { 
+                var model = db.roundInterviews.Where(x => x.Results.ToString().Contains(SearchValue) || SearchValue == null).ToList();
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
             else
-
             {
-               
-                //var job = new List<Job>();
-                //interviewModels = db.roundInterviews.Where(x => job.Any(f => f.SelectedSkillID == x.Jobs.SelectedSkillID)).ToList();
-                //interviewModels = db.Jobs.Where(x => x.Id.sel);
-
-                 interviewModels = db.roundInterviews.Where(x => x.Interview.Name.Contains(SearchValue) || x.Date_Time.ToString().Contains(SearchValue) || x.Jobs.SelectedSkillID.Contains(SearchValue) || x.Results.ToString().Contains(SearchValue) || SearchValue == null).ToList();
-                //interviewModels = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue)).Where(x => x.Interview.Name.Contains(SearchValue)).Where(x=> x.Date_Time.ToString().Contains(SearchValue)).ToList();
-                return Json(interviewModels, JsonRequestBehavior.AllowGet);
+                var model = db.roundInterviews.Where(x => x.Date_Time.ToString().Contains(SearchValue) || SearchValue == null).ToList();
+                return Json(model, JsonRequestBehavior.AllowGet);
             }
-
         }
         public ActionResult Index1(string SearchBy, string SearchValue,int? id=45)
         {
@@ -340,73 +312,17 @@ namespace Test_Identity.Controllers
                 {
 
                     var roundInterview = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
-                    //var jobObject1 = db.Jobs.ToList();
-                    //foreach (var getSkillId in jobObject1)
-                    //{
-                    //    IEnumerable<int> fetchedSkillIds1 = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
-                    //    var getSkillName = db.Skills.Where(x => fetchedSkillIds1.Contains(x.SkillId))
-                    //    .Select(skillName => new
-                    //    {
-                    //        skillName.SkillName
-                    //    });
-
-                    //    string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
-                    //    getSkillId.SelectedSkillID = fetchSkillName;
-                    //}
                     var filterData = roundInterview.Where(x => x.Jobs.SelectedSkillID.ToLower().Contains(SearchValue.ToLower())).ToList();
                     return View(filterData);
 
-                    // Skills skill = new Skills
-                    //var sk = db.Skills.Where(x=>x.SkillName.Contains(SearchValue)).ToList();
-
-                    //SearchValue = sk.Count.
-
-                    //var skillid = db.roundInterviews
-                    //var model = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
-                    //var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
-                    //var model = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
-                    //var skillArrayString = db.roundInterviews.Select(y => y.Jobs.SelectedSkillID);
-                    //int[] skillArrayint = Array.ConvertAll(skillArrayString,int.Parse);
-
-                    //foreach (var getSkillId in jobObject)
-                    //{
-                    //    IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
-                    //    var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
-                    //    .Select(skillName => new
-                    //    {
-                    //        skillName.SkillName
-                    //    });
-
-                    //    string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
-                    //    getSkillId.SelectedSkillID = fetchSkillName;
-                    //    var model = fetchSkillName.Contains(SearchValue)
-
-
-                    //}
-                    //IEnumerable<int> fetchedSkillIds = jobObject.Select(x => x.SelectedSkillID).ToString().Split(',').Select(Int32.Parse);
-                    ////db.Jobs.Select(x => x.SelectedSkillID) = fetchedSkillIds;
-                    ////jobObject.Select(x=>x.SelectedSkillID) 
-
-                    //// IEnumerable<int> fetchedSkillIds = jobObject.Select(x=>x.SelectedSkillID).ToString().Split(',').Select(Int32.Parse);
-                    //var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
-                    //.Select(skillName => new
-                    //{
-                    //    skillName.SkillName
-                    //});
-
-
-                    //return View(model);
-
                 }
                 else if (SearchBy == "Results")
-                {
-                    //var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
+                { 
                     var model = db.roundInterviews.Where(x => x.Results.ToString().Contains(SearchValue) || SearchValue == null).ToList();
                     return View(model);
                 }
                 else if (SearchBy == "Date_Time")
                 {
-                    //var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
                     var model = db.roundInterviews.Where(x => x.Date_Time.ToString().Contains(SearchValue) || SearchValue == null).ToList();
                     return View(model);
                 }
@@ -439,58 +355,19 @@ namespace Test_Identity.Controllers
                     var filterData = roundInterview.Where(x => x.Jobs.SelectedSkillID.ToLower().Contains(SearchValue.ToLower())).ToList();
                     return View(filterData);
 
-                    //var model = db.Skills.Where(x=>x.SkillName.Contains(SearchValue) || SearchValue == null).ToList();
-
-                    //var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
-                    //var model = db.roundInterviews.Where(x => x.Jobs.SelectedSkillID.Contains(SearchValue) || SearchValue == null).ToList();
-                    //var skillArrayString = db.roundInterviews.Select(y => y.Jobs.SelectedSkillID);
-                    //int[] skillArrayint = Array.ConvertAll(skillArrayString,int.Parse);
-
-                    //foreach (var getSkillId in jobObject)
-                    //{
-                    //    IEnumerable<int> fetchedSkillIds = getSkillId.SelectedSkillID.ToString().Split(',').Select(Int32.Parse);
-                    //    var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
-                    //    .Select(skillName => new
-                    //    {
-                    //        skillName.SkillName
-                    //    });
-
-                    //    string fetchSkillName = string.Join(",", getSkillName.Select(x => x.SkillName));
-                    //    getSkillId.SelectedSkillID = fetchSkillName;
-                    //    var model = fetchSkillName.Contains(SearchValue)
-
-
-                    //}
-                    //IEnumerable<int> fetchedSkillIds = jobObject.Select(x => x.SelectedSkillID).ToString().Split(',').Select(Int32.Parse);
-                    ////db.Jobs.Select(x => x.SelectedSkillID) = fetchedSkillIds;
-                    ////jobObject.Select(x=>x.SelectedSkillID) 
-
-                    //// IEnumerable<int> fetchedSkillIds = jobObject.Select(x=>x.SelectedSkillID).ToString().Split(',').Select(Int32.Parse);
-                    //var getSkillName = db.Skills.Where(x => fetchedSkillIds.Contains(x.SkillId))
-                    //.Select(skillName => new
-                    //{
-                    //    skillName.SkillName
-                    //});
-
-
-
-
                 }
                 else if (SearchBy == "Results")
                 {
-                    //var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
                     var model = db.roundInterviews.Where(x => x.Results.ToString().Contains(SearchValue) || SearchValue == null).ToList();
                     return View(model);
                 }
                 else 
                 {
-                    //var roundInterviews = db.roundInterviews.Include(i => i.Candidate).Include(i => i.Interview).Include(i => i.Jobs).ToList();
                     var model = db.roundInterviews.Where(x => x.Date_Time.ToString().Contains(SearchValue) || SearchValue == null).ToList();
                     return View(model);
                 }
                 
             }
-            
 
         }
         protected override void Dispose(bool disposing)
